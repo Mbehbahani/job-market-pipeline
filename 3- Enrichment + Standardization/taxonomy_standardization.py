@@ -303,7 +303,7 @@ def fill_job_type(df: pd.DataFrame) -> pd.DataFrame:
     
     print(f"  Original filled: {original_filled} ({original_filled/len(df)*100:.1f}%)")
     print(f"  After filling:   {new_filled} ({new_filled/len(df)*100:.1f}%)")
-    print(f"\n  Distribution:")
+    print("\n  Distribution:")
     for val, count in df['job_type_filled'].value_counts().items():
         print(f"    {val:<20}: {count:>5} ({count/len(df)*100:.1f}%)")
     
@@ -367,7 +367,7 @@ def fill_education_level(df: pd.DataFrame) -> pd.DataFrame:
     print(f"  Original NA: {original_na} ({original_na/len(df)*100:.1f}%)")
     print(f"  After fill NA: {new_na} ({new_na/len(df)*100:.1f}%)")
     print(f"  Filled: {original_na - new_na} additional records")
-    print(f"\n  Top 10 Distribution:")
+    print("\n  Top 10 Distribution:")
     for val, count in df['edu_level_filled'].value_counts().head(10).items():
         print(f"    {val:<35}: {count:>5} ({count/len(df)*100:.1f}%)")
     
@@ -425,7 +425,7 @@ def standardize_job_levels(df: pd.DataFrame) -> pd.DataFrame:
     # Statistics
     print(f"  Original unique values: {df['job_level'].nunique()}")
     print(f"  Standardized categories: {df['job_level_std'].nunique()}")
-    print(f"\n  Mapping results:")
+    print("\n  Mapping results:")
     
     # Show mapping
     mapping_df = df.groupby(['job_level', 'job_level_std']).size().reset_index(name='count')
@@ -433,7 +433,7 @@ def standardize_job_levels(df: pd.DataFrame) -> pd.DataFrame:
     for _, row in mapping_df.iterrows():
         print(f"    {str(row['job_level']):<25} → {row['job_level_std']:<15} ({row['count']:>4})")
     
-    print(f"\n  Final Distribution:")
+    print("\n  Final Distribution:")
     for val, count in df['job_level_std'].value_counts().items():
         print(f"    {val:<20}: {count:>5} ({count/len(df)*100:.1f}%)")
     
@@ -494,7 +494,7 @@ def standardize_job_functions(df: pd.DataFrame) -> pd.DataFrame:
     print(f"  Original unique values: {df['job_function'].nunique()}")
     print(f"  Standardized categories: {df['job_function_std'].nunique()}")
     
-    print(f"\n  Final Distribution:")
+    print("\n  Final Distribution:")
     for val, count in df['job_function_std'].value_counts().items():
         print(f"    {val:<30}: {count:>5} ({count/len(df)*100:.1f}%)")
     
@@ -575,7 +575,7 @@ def standardize_company_industries(df: pd.DataFrame) -> pd.DataFrame:
     print(f"  Standardized 'Other': {new_other} ({new_other/len(df)*100:.1f}%)")
     print(f"  Standardized categories: {df['company_industry_std'].nunique()}")
     
-    print(f"\n  Final Distribution:")
+    print("\n  Final Distribution:")
     for val, count in df['company_industry_std'].value_counts().items():
         print(f"    {val:<35}: {count:>5} ({count/len(df)*100:.1f}%)")
     
@@ -678,7 +678,7 @@ def extract_skills(df: pd.DataFrame) -> pd.DataFrame:
     # Use either cleaned description or raw description
     desc_column = 'job_description_clean' if 'job_description_clean' in df.columns else 'job_description'
     print(f"  Using description column: {desc_column}")
-    print(f"  Output: Updating existing 'skills' column with category-level values")
+    print("  Output: Updating existing 'skills' column with category-level values")
     
     # Store original for comparison
     original_skills = df['skills'].copy() if 'skills' in df.columns else None
@@ -705,7 +705,7 @@ def extract_skills(df: pd.DataFrame) -> pd.DataFrame:
     total_category_mentions = len(all_categories_flat)
     avg_categories_per_job = total_category_mentions / len(df) if len(df) > 0 else 0
     
-    print(f"\n  Results:")
+    print("\n  Results:")
     print(f"    Jobs with skills extracted: {jobs_with_skills} ({jobs_with_skills_pct:.1f}%)")
     print(f"    Unique categories found:    {unique_categories}")
     print(f"    Total category mentions:    {total_category_mentions}")
@@ -720,7 +720,7 @@ def extract_skills(df: pd.DataFrame) -> pd.DataFrame:
     # Compare with original if exists
     if original_skills is not None:
         original_filled = (original_skills.apply(lambda x: pd.notna(x) and str(x).strip() != '' and str(x) != 'NA')).sum()
-        print(f"\n  Comparison with Original:")
+        print("\n  Comparison with Original:")
         print(f"    Original 'skills' column filled: {original_filled} ({original_filled/len(df)*100:.1f}%)")
         print(f"    Updated 'skills' column filled:  {jobs_with_skills} ({jobs_with_skills_pct:.1f}%)")
     
@@ -815,7 +815,7 @@ def extract_tools(df: pd.DataFrame) -> pd.DataFrame:
     # Use either cleaned description or raw description
     desc_column = 'job_description_clean' if 'job_description_clean' in df.columns else 'job_description'
     print(f"  Using description column: {desc_column}")
-    print(f"  Output: Creating 'tools' column")
+    print("  Output: Creating 'tools' column")
     
     # Extract tools for each job
     print(f"  Processing {len(df)} job descriptions...")
@@ -839,7 +839,7 @@ def extract_tools(df: pd.DataFrame) -> pd.DataFrame:
     total_tool_mentions = len(all_tools_flat)
     avg_tools_per_job = total_tool_mentions / len(df) if len(df) > 0 else 0
     
-    print(f"\n  Results:")
+    print("\n  Results:")
     print(f"    Jobs with tools extracted:  {jobs_with_tools} ({jobs_with_tools_pct:.1f}%)")
     print(f"    Unique tools found:         {unique_tools}")
     print(f"    Total tool mentions:        {total_tool_mentions}")
@@ -869,7 +869,7 @@ def extract_tools(df: pd.DataFrame) -> pd.DataFrame:
         # so tool categories (Pyomo, OR-Tools, etc.) that were previously
         # used as category names are already removed from skills_reference.json.
         # No additional cleanup needed since we updated skills_reference.json.
-        print(f"\n  \u2713 Skills column already uses updated skills_reference.json (tools excluded)")
+        print("\n  \u2713 Skills column already uses updated skills_reference.json (tools excluded)")
     
     return df
 
@@ -1032,7 +1032,7 @@ def add_relevance_score(df: pd.DataFrame) -> pd.DataFrame:
         axis=1
     )
     
-    print(f"    Keyword Frequency Distribution:")
+    print("    Keyword Frequency Distribution:")
     freq_ranges = [(0, 0), (1, 2), (3, 5), (6, 10), (11, 15), (16, 20), (21, float('inf'))]
     freq_labels = ['0', '1-2', '3-5', '6-10', '11-15', '16-20', '21+']
     for (low, high), label in zip(freq_ranges, freq_labels):
@@ -1058,23 +1058,23 @@ def add_relevance_score(df: pd.DataFrame) -> pd.DataFrame:
     )
     
     # Scoring rules explanation
-    print(f"\n  Scoring Rules (1-10 scale):")
-    print(f"    Base Score (from keyword tiers):")
-    print(f"      - Tier1 + Tier2:                    4 points")
-    print(f"      - Tier1 (high-value or multiple):  3 points")
-    print(f"      - Tier1 (single, basic):           2 points")
-    print(f"      - Tier2 (multiple):                2 points")
-    print(f"      - Tier2 (single):                  1 point")
-    print(f"      - No keywords:                     0 points")
-    print(f"\n    Frequency Bonus:")
-    print(f"      - 1-2 occurrences:   +1 point")
-    print(f"      - 3-5 occurrences:   +2 points")
-    print(f"      - 6-10 occurrences:  +3 points")
-    print(f"      - 11-15 occurrences: +4 points")
-    print(f"      - 16-20 occurrences: +5 points")
-    print(f"      - 21+ occurrences:   +6 points")
+    print("\n  Scoring Rules (1-10 scale):")
+    print("    Base Score (from keyword tiers):")
+    print("      - Tier1 + Tier2:                    4 points")
+    print("      - Tier1 (high-value or multiple):  3 points")
+    print("      - Tier1 (single, basic):           2 points")
+    print("      - Tier2 (multiple):                2 points")
+    print("      - Tier2 (single):                  1 point")
+    print("      - No keywords:                     0 points")
+    print("\n    Frequency Bonus:")
+    print("      - 1-2 occurrences:   +1 point")
+    print("      - 3-5 occurrences:   +2 points")
+    print("      - 6-10 occurrences:  +3 points")
+    print("      - 11-15 occurrences: +4 points")
+    print("      - 16-20 occurrences: +5 points")
+    print("      - 21+ occurrences:   +6 points")
     
-    print(f"\n  Score Distribution:")
+    print("\n  Score Distribution:")
     for score in sorted(df['job_relevance_score'].unique(), reverse=True):
         count = (df['job_relevance_score'] == score).sum()
         pct = count / len(df) * 100
@@ -1084,7 +1084,7 @@ def add_relevance_score(df: pd.DataFrame) -> pd.DataFrame:
     print(f"  Median Score:  {df['job_relevance_score'].median():.0f}")
     
     # Show examples by score tier
-    print(f"\n  Sample Jobs by Score Tier:")
+    print("\n  Sample Jobs by Score Tier:")
     for score in [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]:
         sample = df[df['job_relevance_score'] == score].head(1)
         if len(sample) > 0:
@@ -1287,7 +1287,7 @@ def run_enrichment_pipeline():
     
     print(f"✅ Saved {len(df)} records to {OUTPUT_DB_PATH}")
     print(f"   Total columns: {len(df.columns)}")
-    print(f"   Columns added/updated: job_type_filled, edu_level_filled, job_level_std, job_function_std, company_industry_std, skills (updated)")
+    print("   Columns added/updated: job_type_filled, edu_level_filled, job_level_std, job_function_std, company_industry_std, skills (updated)")
     
     # Generate report
     generate_report(df, REPORT_PATH)

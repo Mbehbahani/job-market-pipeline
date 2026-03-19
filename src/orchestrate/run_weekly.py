@@ -41,9 +41,9 @@ import sqlite3
 import subprocess
 import logging
 import argparse
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))

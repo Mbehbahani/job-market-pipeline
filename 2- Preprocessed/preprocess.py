@@ -644,7 +644,7 @@ def run_preprocessing_pipeline():
     clean_lengths = df["job_description_clean"].str.len()
     reduction_pct = ((orig_lengths - clean_lengths) / orig_lengths.replace(0, 1) * 100).mean()
     
-    print(f"📊 Normalization Statistics:")
+    print("📊 Normalization Statistics:")
     print(f"   Original avg length: {orig_lengths.mean():.0f} chars")
     print(f"   Cleaned avg length:  {clean_lengths.mean():.0f} chars")
     print(f"   Average reduction:   {reduction_pct:.1f}%\n")
@@ -663,7 +663,7 @@ def run_preprocessing_pipeline():
         print("Detecting languages from job descriptions...")
         df["detected_language"] = df["job_description_clean"].apply(lang_detector.detect)
     
-    print(f"\n📊 Language Distribution:")
+    print("\n📊 Language Distribution:")
     lang_dist = df["detected_language"].value_counts()
     for lang, count in lang_dist.head(10).items():
         print(f"   {lang:10} : {count:4d} ({count/len(df)*100:.1f}%)")
@@ -742,7 +742,7 @@ def run_preprocessing_pipeline():
     df['job_level'] = df['job_level_refined']
     df.drop(columns=['job_level_refined'], inplace=True)
     
-    print(f"\n   ✓ Job levels refined successfully")
+    print("\n   ✓ Job levels refined successfully")
     
     # -------------------------------------------------------------------------
     # Standardize NA values

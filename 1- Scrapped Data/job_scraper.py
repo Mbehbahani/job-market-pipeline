@@ -815,10 +815,10 @@ async def scrape_optimization_jobs(
     print("\n" + "=" * 70)
     print("[OPTIMIZATION JOBS SCRAPER] - Multi-Country & Multi-Platform")
     print("=" * 70)
-    print(f"Platform filters:")
+    print("Platform filters:")
     print(f"  Indeed targets: {', '.join(sorted(allowed_indeed))}")
     print(f"  LinkedIn targets: {', '.join(sorted(allowed_linkedin))}")
-    print(f"\nTarget Jobs: Market-based distribution (larger markets = more jobs)")
+    print("\nTarget Jobs: Market-based distribution (larger markets = more jobs)")
     if COUNTRY_JOB_MULTIPLIER != 1.0:
         print(f"Multiplier: {COUNTRY_JOB_MULTIPLIER}x (scaled targets)")
     for country_key in target_countries:
@@ -831,7 +831,7 @@ async def scrape_optimization_jobs(
     linkedin_countries_count = len(allowed_linkedin)
     if linkedin_countries_count > 2:
         print(f"\n[WARNING] Scraping {linkedin_countries_count} countries on LinkedIn")
-        print(f"   LinkedIn may block after ~90-120 queries (rate limiting)")
+        print("   LinkedIn may block after ~90-120 queries (rate limiting)")
         print(f"   With {len(SEARCH_TERMS)} search terms x {linkedin_countries_count} countries = {len(SEARCH_TERMS) * linkedin_countries_count} total queries")
     
     print("=" * 70 + "\n")
@@ -872,7 +872,7 @@ async def scrape_optimization_jobs(
 
         # ===== INDEED SCRAPING (per search term) =====
         if run_indeed:
-            print(f"\n  [INDEED Platform]")
+            print("\n  [INDEED Platform]")
             for search_term in SEARCH_TERMS:
                 print(f"\n    [SEARCH] {search_term}...")
                 try:
@@ -947,12 +947,12 @@ async def scrape_optimization_jobs(
                     logger.error(f"Error scraping '{search_term}' on Indeed in {country['name']}: {e}")
                     continue
         else:
-            print(f"\n  [SKIP] Indeed scraping skipped for this country")
+            print("\n  [SKIP] Indeed scraping skipped for this country")
 
         # ===== LINKEDIN SCRAPING (improved notebook approach) =====
         if run_linkedin:
             # LinkedIn uses batch approach: run all queries for a country, then process
-            print(f"\n  [LINKEDIN Platform] (improved sequential approach)")
+            print("\n  [LINKEDIN Platform] (improved sequential approach)")
             print(f"    Running {len(SEARCH_TERMS)} queries with {LINKEDIN_SLEEP_SEC}s delay between each...")
             
             linkedin_df = scrape_linkedin_for_country(
@@ -1024,7 +1024,7 @@ async def scrape_optimization_jobs(
             else:
                 print(f"    [WARNING] No LinkedIn jobs found for {country['name']}")
         else:
-            print(f"\n  [SKIP] LinkedIn scraping skipped for this country")
+            print("\n  [SKIP] LinkedIn scraping skipped for this country")
 
         if country_jobs:
             # Store to database
@@ -1040,10 +1040,10 @@ async def scrape_optimization_jobs(
             time.sleep(delay)
 
     # Print summary
-    print(f"\n" + "=" * 70)
-    print(f"[OK] SCRAPING COMPLETE!")
-    print(f"=" * 70)
-    print(f"\n[STATS] Results by Country & Platform:")
+    print("\n" + "=" * 70)
+    print("[OK] SCRAPING COMPLETE!")
+    print("=" * 70)
+    print("\n[STATS] Results by Country & Platform:")
     for country_key, stats in country_stats.items():
         if country_key in COUNTRIES:
             total = stats["indeed"] + stats["linkedin"]
@@ -1059,8 +1059,8 @@ async def scrape_optimization_jobs(
     print(f"  - Unique URLs: {len(seen_urls)}")
     if len(all_jobs) > len(seen_urls):
         print(f"  ⚠️  Warning: {len(all_jobs) - len(seen_urls)} duplicate URLs detected (this shouldn't happen)")
-    print(f"[DATABASE] Data stored in: data/jobs.db")
-    print(f"=" * 70)
+    print("[DATABASE] Data stored in: data/jobs.db")
+    print("=" * 70)
 
     # Print filter effectiveness analysis
     filter_stats.print_summary()
