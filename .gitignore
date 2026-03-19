@@ -1,0 +1,85 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment files
+.env
+.env.*
+.envrc
+!.env.example
+.env.local
+.env.*.local
+
+# Database files (large, generated)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Backups
+backups/
+**/backups/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.out
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# Temporary files
+tmp/
+temp/
+/tmp/
+zDocs/
+cfn/
+terraform/
+data/
+artifacts/
+reports/
+
+# AWS credentials (never commit!)
+*.pem
+.aws/
+.aws/credentials
+aws-ecr-uri.txt
+aws-bucket-name.txt
+.github/workflows/secrets/
+
+run.txt
+PIPELINE_ASSESSMENT.md
+PIPELINE_BEHAVIOR.md
+PIPELINE_SUMMARY.md
+RUNBOOK.md
+3- Enrichment + Standardization/prompt.txt
+task-definition.json
+
+# Local generated stage outputs
+1- Scrapped Data/data/
+2- Preprocessed/backups/
+*.csv
+*.parquet
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
